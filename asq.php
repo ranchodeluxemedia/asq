@@ -3,7 +3,7 @@
 /*
 Plugin Name: 	Asq
 Plugin URI: 	http://github.com/gizburdt
-Description: 	Awesome shortcodes!
+Description: 	Managing FAQ
 Version: 		0.1
 Author: 		Gizburdt
 Author URI: 	http://gizburdt.com
