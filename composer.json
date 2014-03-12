@@ -1,0 +1,13 @@
+{
+    "name": "gizburdt/asq",
+    "type": "wordpress-plugin",
+    "description": "Managing Frequently Asked Questions",
+    "authors": [
+        {
+            "name": "Gizburdt",
+            "email": "gizburdt@gmail.com"
+        }
+    ],
+    "require": {
+    }
+}
