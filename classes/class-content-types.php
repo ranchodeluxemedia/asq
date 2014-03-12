@@ -82,6 +82,6 @@ class Asq_Content_Types
 			'rewrite'           => array( 'slug' => 'faq-category' ),
 		);
 
-		register_taxonomy( 'faq_category', array( 'asq_question' ), $args );
+		register_taxonomy( 'asq_category', array( 'asq_question' ), $args );
 	}
 }

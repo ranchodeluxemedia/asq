@@ -17,7 +17,24 @@ class Asq_Shortcodes
 			'category'			=> ''
 		), $atts ) );
 
-		$query 		= new WP_Query( array( 'post_type' => 'asq_question' ) );
+		$args		= array( 'post_type' => 'asq_question' );
+
+		if( ! empty( $category ) )
+		{
+			$field = 'slug';
+
+			$args['tax_query'] = array( 
+				array( 
+					'taxonomy' 	=> 'asq_category', 
+					'field' 	=> $field, 
+					'terms' 	=> $category 
+				) 
+			);
+		}
+
+		$args['posts_per_page'] = ! empty( $count ) ? $count : -1;
+
+		$query 		= new WP_Query( $args );
 
 		ob_start();
 
