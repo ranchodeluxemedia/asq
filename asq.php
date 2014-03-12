@@ -50,6 +50,7 @@ class Asq
 	function includes()
 	{
 		include( ASQ_DIR . 'classes/class-content-types.php' );
+		include( ASQ_DIR . 'classes/class-shortcodes.php' );
 	}
 
 	function add_hooks()
@@ -66,6 +67,7 @@ class Asq
 	function execute()
 	{
 		self::$instance->content_types 		= new Asq_Content_Types;
+		self::$instance->shortcodes 		= new Asq_Shortcodes;
 	}
 
 	function register_styles()

@@ -84,32 +84,4 @@ class Asq_Content_Types
 
 		register_taxonomy( 'faq_category', array( 'asq_question' ), $args );
 	}
-
-	function shortcode( $atts, $content = null )
-	{
-		extract( shortcode_atts( array(
-			'count'			=> 10,
-			'category'		=> ''
-		), $atts ) );
-
-		$query 		= new WP_Query( array( 'post_type' => 'question' ) );
-
-		ob_start();
-
-		echo '<div class="asq">';
-			do_action( 'asq_before_accordion' );
-			if( $query->have_posts() ) : 
-				echo '<div class="asq-accordion">';
-					while ( $query->have_posts() ) : $query->the_post();
-						echo '<h4>' . get_the_title() . '</h4>';
-						echo '<div>' . get_the_content() . '</div>';
-					endwhile; 
-				echo '</div>';
-			endif;
-			wp_reset_postdata();
-			do_action( 'asq_after_accordion' );
-		echo '</div>';
-
-		$output = ob_get_clean(); return $output;
-	}
 }
