@@ -1,5 +1,7 @@
 <?php
 
+if( ! defined( 'ABSPATH' ) ) exit;
+
 class Asq_Content_Types
 {
 	function __construct()
