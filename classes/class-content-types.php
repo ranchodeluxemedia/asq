@@ -9,9 +9,6 @@ class Asq_Content_Types
 		// Init
 		add_action( 'init', array( &$this, 'register_post_types' ) );
 		add_action( 'init', array( &$this, 'register_taxonomies' ) );
-
-		// Shortcodes
-		add_shortcode( 'faq', array( &$this, 'shortcode' ) );
 	}
 
 	/**
