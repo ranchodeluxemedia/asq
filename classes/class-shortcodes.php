@@ -46,7 +46,7 @@ class Asq_Shortcodes
 			$category 				= get_term_by( 'slug', $category, 'asq_category' );
 
 			echo '<div class="asq ' . $class . '">';
-				echo '<a id="' . $cateogry->slug . '"></a>';
+				echo '<a id="' . $category->slug . '"></a>';
 				if( $show_title )
 					echo $before_title . $category->name . $after_title;
 
