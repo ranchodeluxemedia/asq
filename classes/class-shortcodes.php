@@ -16,7 +16,7 @@ class Asq_Shortcodes
 		extract( shortcode_atts( array(
 			'class'				=> '',
 			'count'				=> -1,
-			'category'			=> ''
+			'category'			=> '',
 			'show_title'		=> false,
 			'before_title'		=> '<h3>',
 			'after_title'		=> '</h3>'
