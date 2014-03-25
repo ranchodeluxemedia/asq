@@ -79,7 +79,7 @@ class Asq_Shortcodes
 
 		ob_start();
 
-		foreach( $terms as $term )
+		foreach( $terms as $term ) :
 			echo do_shortcode('[faq category="' . $category->slug . '" show_title=true]');
 		endforeach;
 
