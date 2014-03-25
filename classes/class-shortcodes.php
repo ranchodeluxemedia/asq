@@ -13,7 +13,7 @@ class Asq_Shortcodes
 	{
 		extract( shortcode_atts( array(
 			'class'				=> '',
-			'count'				=> 10,
+			'count'				=> -1,
 			'category'			=> ''
 		), $atts ) );
 
@@ -34,7 +34,7 @@ class Asq_Shortcodes
 
 		$args['posts_per_page'] = ! empty( $count ) ? $count : -1;
 
-		$query 		= new WP_Query( $args );
+		$query = new WP_Query( $args );
 
 		ob_start();
 

@@ -15,7 +15,7 @@ if( ! defined( 'ABSPATH' ) ) exit;
 if( ! class_exists( 'Asq' ) ) :
 
 /**
- * Aqs
+ * Asq
  */
 class Asq
 {
