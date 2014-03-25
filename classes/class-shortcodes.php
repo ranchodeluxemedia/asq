@@ -21,67 +21,60 @@ class Asq_Shortcodes
 			'before_title'		=> '<h3>',
 			'after_title'		=> '</h3>'
 		), $atts ) );
+		ob_start();
 
-		$args		= array( 'post_type' => 'asq_question' );
-
+		// Show questions based on category
 		if( ! empty( $category ) )
 		{
-			$field = 'slug';
+			$args = array( 'post_type' => 'asq_question' );
 
-			$args['tax_query'] = array( 
-				array( 
-					'taxonomy' 	=> 'asq_category', 
-					'field' 	=> $field, 
-					'terms' 	=> $category 
-				) 
-			);
+			if( ! empty( $category ) )
+			{
+				$args['tax_query'] = array( 
+					array( 
+						'taxonomy' 	=> 'asq_category', 
+						'field' 	=> 'slug', 
+						'terms' 	=> $category 
+					) 
+				);
+			}
+
+			$args['posts_per_page'] = ! empty( $count ) ? $count : -1;
+			$query 					= new WP_Query( $args );
+			$category 				= get_term_by( 'slug', $category, 'asq_category' );
+
+			echo '<div class="asq ' . $class . '">';
+				if( $show_title )
+					echo $before_title . $category->name . $after_title;
+
+				do_action( 'asq_before_accordion', $class );
+				if( $query->have_posts() ) : 
+					echo '<div class="asq-accordion js-asq-accordion">';
+						while ( $query->have_posts() ) : $query->the_post();
+							echo '<h4>' . get_the_title() . '</h4>';
+							echo '<div>' . get_the_content() . '</div>';
+						endwhile; 
+					echo '</div>';
+				endif;
+				wp_reset_postdata();
+				do_action( 'asq_after_accordion', $class );
+			echo '</div>';
 		}
 
-		$args['posts_per_page'] = ! empty( $count ) ? $count : -1;
+		// Or a complete overview
+		else
+		{
+			$terms = get_terms( 'asq_category', array(
+				'orderby'			=> $orderby,
+				'order'				=> $order
+			));
 
-		$query 		= new WP_Query( $args );
-		$category 	= get_term_by( 'slug', $category, 'asq_category' );
-
-		ob_start();
-
-		echo '<div class="asq ' . $class . '">';
-			if( $show_title )
-				echo $before_title . $category->name . $after_title;
-
-			do_action( 'asq_before_accordion', $class );
-			if( $query->have_posts() ) : 
-				echo '<div class="asq-accordion js-asq-accordion">';
-					while ( $query->have_posts() ) : $query->the_post();
-						echo '<h4>' . get_the_title() . '</h4>';
-						echo '<div>' . get_the_content() . '</div>';
-					endwhile; 
-				echo '</div>';
-			endif;
-			wp_reset_postdata();
-			do_action( 'asq_after_accordion', $class );
-		echo '</div>';
-
-		$output = ob_get_clean(); return $output;
-	}
-
-	function faq_overview( $atts, $content = null )
-	{
-		extract( shortcode_atts( array(
-			'class'				=> '',
-			'orderby'			=> 'name',
-			'order'				=> 'ASC'
-		), $atts ) );
-
-		$terms = get_terms( 'asq_category', array(
-			'orderby'			=> $orderby,
-			'order'				=> $order
-		));
-
-		ob_start();
-
-		foreach( $terms as $term ) :
-			echo do_shortcode('[faq category="' . $category->slug . '" show_title=true]');
-		endforeach;
+			echo '<div class="asq-overview ' . $class . '">';
+				foreach( $terms as $term ) :
+					echo do_shortcode('[faq category="' . $term->slug . '" show_title=true]');
+				endforeach;
+			echo '</div>';
+		}
 
 		$output = ob_get_clean(); return $output;
 	}
