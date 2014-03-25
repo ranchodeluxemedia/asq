@@ -8,7 +8,7 @@ class Asq_Shortcodes
 	{
 		add_shortcode( 'faq', array( &$this, 'faq' ) );
 		add_shortcode( 'faq-overview', array( &$this, 'faq_overview' ) );
-		add_shortcode( 'faq-category-list', array( &$this, 'faq_category_list' ) );
+		add_shortcode( 'faq-table-of-contents', array( &$this, 'faq_table_of_contents' ) );
 	}
 
 	function faq( $atts, $content = null )
@@ -46,6 +46,7 @@ class Asq_Shortcodes
 			$category 				= get_term_by( 'slug', $category, 'asq_category' );
 
 			echo '<div class="asq ' . $class . '">';
+				echo '<a id="' . $cateogry->slug . '"></a>';
 				if( $show_title )
 					echo $before_title . $category->name . $after_title;
 
@@ -81,7 +82,7 @@ class Asq_Shortcodes
 		$output = ob_get_clean(); return $output;
 	}
 
-	function faq_category_list( $atts, $content = null )
+	function faq_table_of_contents( $atts, $content = null )
 	{
 		extract( shortcode_atts( array(
 			'class'				=> '',
