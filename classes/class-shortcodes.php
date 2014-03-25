@@ -6,10 +6,11 @@ class Asq_Shortcodes
 {
 	function __construct()
 	{
-		add_shortcode( 'faq', array( &$this, 'shortcode' ) );
+		add_shortcode( 'faq', array( &$this, 'faq' ) );
+		add_shortcode( 'faq-contents', array( &$this, 'faq_contents' ) );
 	}
 
-	function shortcode( $atts, $content = null )
+	function faq( $atts, $content = null )
 	{
 		extract( shortcode_atts( array(
 			'class'				=> '',
@@ -50,6 +51,37 @@ class Asq_Shortcodes
 			endif;
 			wp_reset_postdata();
 			do_action( 'asq_after_accordion', $class );
+		echo '</div>';
+
+		$output = ob_get_clean(); return $output;
+	}
+
+	function faq_contents( $atts, $content = null )
+	{
+		extract( shortcode_atts( array(
+			'class'				=> '',
+			'orderby'			=> 'name',
+			'order'				=> 'ASC'
+		), $atts ) );
+
+		$terms = get_terms( 'asq_category', array(
+			'orderby'			=> $orderby,
+			'order'				=> $order
+		));
+
+		ob_start();
+
+		echo '<div class="asq-categories ' . $class . '">';
+			do_action( 'asq_before_category_list', $class );
+			if( ! empty( $terms ) ) : 
+				echo '<ul>';
+					foreach( $terms as $term ) :
+						echo '<li><a href="#' . $term->slug . '">' . $term->name . '</a></li>';
+					endforeach; 
+				echo '</ul>';
+			endif;
+			wp_reset_postdata();
+			do_action( 'asq_after_category_list', $class );
 		echo '</div>';
 
 		$output = ob_get_clean(); return $output;
