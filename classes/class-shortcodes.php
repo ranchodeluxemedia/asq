@@ -19,7 +19,9 @@ class Asq_Shortcodes
 			'category'			=> '',
 			'show_title'		=> false,
 			'before_title'		=> '<h3>',
-			'after_title'		=> '</h3>'
+			'after_title'		=> '</h3>',
+			'orderby'			=> 'name',
+			'order'				=> 'ASC'
 		), $atts ) );
 		ob_start();
 
