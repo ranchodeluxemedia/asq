@@ -28,7 +28,7 @@ class Asq_Shortcodes
 		$args 					= array( 'post_type' => 'asq_question' );
 		$args['orderby']		= $orderby;
 		$args['order']			= $order;
-		$args['posts_per_page'] = ! empty( $count ) ? $count : -1;
+		$args['posts_per_page'] = $count;
 
 		if( ! empty( $category ) )
 		{
@@ -39,15 +39,18 @@ class Asq_Shortcodes
 					'terms' 	=> $category 
 				) 
 			);
+
+			$category = get_term_by( 'slug', $category, 'asq_category' );
 		}
 
-		$query 					= new WP_Query( $args );
-		$category 				= get_term_by( 'slug', $category, 'asq_category' );
-
+		$query = new WP_Query( $args );
+		
 		echo '<div class="asq ' . $class . '">';
-			echo '<a id="' . $category->slug . '"></a>';
-			if( $show_title )
+			if( $show_title && @$category )
+			{
+				echo '<a id="' . $category->slug . '"></a>';
 				echo $before_title . $category->name . $after_title;
+			}
 
 			do_action( 'asq_before_accordion', $class );
 			if( $query->have_posts() ) : 
