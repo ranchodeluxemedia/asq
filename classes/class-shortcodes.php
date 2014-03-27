@@ -89,6 +89,8 @@ class Asq_Shortcodes
 				echo do_shortcode('[faq category="' . $term->slug . '" show_title=' . $show_title . ']');
 			endforeach;
 		echo '</div>';
+
+		$output = ob_get_clean(); return $output;
 	}
 
 	function faq_table_of_contents( $atts, $content = null )
