@@ -17,6 +17,7 @@ class Asq_Shortcodes
 			'class'				=> '',
 			'count'				=> -1,
 			'category'			=> '',
+			'ids'				=> '',
 			'show_title'		=> false,
 			'before_title'		=> '<h3>',
 			'after_title'		=> '</h3>',
@@ -30,7 +31,11 @@ class Asq_Shortcodes
 		$args['order']			= $order;
 		$args['posts_per_page'] = $count;
 
-		if( ! empty( $category ) )
+		if( ! empty( $ids ) )
+		{
+			$args['post__in'] 	= explode( ',', $ids );
+		}
+		elseif( ! empty( $category ) )
 		{
 			$args['tax_query'] = array( 
 				array( 
