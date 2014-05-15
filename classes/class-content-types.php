@@ -37,18 +37,18 @@ class Asq_Content_Types
 		);
 
 		$args = array(
-			'labels'             => $labels,
-			'public'             => true,
-			'publicly_queryable' => true,
-			'show_ui'            => true,
-			'show_in_menu'       => true,
-			'query_var'          => true,
-			'rewrite'            => array( 'slug' => 'question' ),
-			'capability_type'    => 'post',
-			'has_archive'        => false,
-			'hierarchical'       => false,
-			'menu_position'      => null,
-			'supports'           => apply_filters( 'asq_question_supports', array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ) )
+			'labels'             	=> $labels,
+			'public'             	=> false,
+			'publicly_queryable' 	=> false,
+			'show_ui'            	=> true,
+			'show_in_menu'       	=> true,
+			'query_var'          	=> false,
+			'rewrite'            	=> array( 'slug' => 'question' ),
+			'capability_type'    	=> 'post',
+			'has_archive'        	=> false,
+			'hierarchical'       	=> false,
+			'menu_position'      	=> null,
+			'supports'           	=> apply_filters( 'asq_question_supports', array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ) )
 		);
 
 		register_post_type( 'asq_question', $args );
@@ -71,12 +71,17 @@ class Asq_Content_Types
 		);
 
 		$args = array(
-			'hierarchical'      => true,
-			'labels'            => $labels,
-			'show_ui'           => true,
-			'show_admin_column' => true,
-			'query_var'         => true,
-			'rewrite'           => array( 'slug' => 'faq-category' ),
+			'labels'             	=> $labels,
+			'public'             	=> false,
+			'publicly_queryable' 	=> false,
+			'show_ui'            	=> true,
+			'show_in_menu'       	=> true,
+			'query_var'          	=> false,
+			'rewrite'           	=> array( 'slug' => 'faq-category' ),
+			'capability_type'    	=> 'post',
+			'has_archive'        	=> false,
+			'hierarchical'       	=> false,
+			'menu_position'      	=> null,
 		);
 
 		register_taxonomy( 'asq_category', array( 'asq_question' ), $args );
