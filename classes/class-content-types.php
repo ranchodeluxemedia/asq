@@ -47,7 +47,6 @@ class Asq_Content_Types
 			'capability_type'    	=> 'post',
 			'has_archive'        	=> false,
 			'hierarchical'       	=> false,
-			'menu_position'      	=> null,
 			'supports'           	=> apply_filters( 'asq_question_supports', array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ) )
 		);
 
@@ -78,10 +77,8 @@ class Asq_Content_Types
 			'show_in_menu'       	=> true,
 			'query_var'          	=> false,
 			'rewrite'           	=> array( 'slug' => 'faq-category' ),
-			'capability_type'    	=> 'post',
 			'has_archive'        	=> false,
-			'hierarchical'       	=> false,
-			'menu_position'      	=> null,
+			'hierarchical'       	=> true,
 		);
 
 		register_taxonomy( 'asq_category', array( 'asq_question' ), $args );
