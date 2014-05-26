@@ -62,7 +62,7 @@ class Asq_Shortcodes
 				echo '<div class="asq-accordion js-asq-accordion">';
 					while ( $query->have_posts() ) : $query->the_post();
 						echo '<h4>' . get_the_title() . '</h4>';
-						echo '<div>' . get_the_content() . '</div>';
+						echo '<div>' . apply_filters( 'the_content', get_the_content() ) . '</div>';
 					endwhile; 
 				echo '</div>';
 			endif;
