@@ -57,7 +57,7 @@ class Asq_Shortcodes
 				echo $before_title . $category->name . $after_title;
 			}
 
-			do_action( 'asq_before_accordion', $class );
+			do_action( 'asq_before_accordion', $class, $category );
 			if( $query->have_posts() ) : 
 				echo '<div class="asq-accordion js-asq-accordion">';
 					while ( $query->have_posts() ) : $query->the_post();
@@ -67,7 +67,7 @@ class Asq_Shortcodes
 				echo '</div>';
 			endif;
 			wp_reset_postdata();
-			do_action( 'asq_after_accordion', $class );
+			do_action( 'asq_after_accordion', $class, $category );
 		echo '</div>';
 
 		$output = ob_get_clean(); return $output;
